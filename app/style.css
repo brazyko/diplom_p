@@ -1,0 +1,103 @@
+/* styles.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #333333;
+}
+
+.stButton > button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.stButton > button:hover {
+    background-color: #45a049;
+}
+
+.stTextInput > div > input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.sidebar .sidebar-content {
+    background-color: #2e7d32;
+    color: white;
+}
+
+.sidebar .sidebar-content a {
+    color: white;
+    text-decoration: none;
+}
+
+.stTextInput > div {
+    margin-bottom: 10px;
+}
+
+/* styles.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #989898;
+}
+
+.stButton > button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.stButton > button:hover {
+    background-color: #45a049;
+}
+
+.stTextInput > div > input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.sidebar .sidebar-content {
+    background-color: #2e7d32;
+    color: white;
+}
+
+.sidebar .sidebar-content a {
+    color: white;
+    text-decoration: none;
+}
+
+.stTextInput > div {
+    margin-bottom: 10px;
+}
+
+
+table td {
+    font-size: 18px !important;
+    color: white;
+}

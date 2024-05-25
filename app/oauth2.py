@@ -1,12 +1,14 @@
 import base64
 from typing import List
+
+from cryptography.fernet import InvalidToken
 from fastapi import Depends, HTTPException, status
 from fastapi_jwt_auth import AuthJWT
 from pydantic import BaseModel
 from bson.objectid import ObjectId
 from app.serializers.userSerializers import user_entity
 from .database import User
-from .config import settings
+from .config import settings, FERNET_KEY
 
 
 class Settings(BaseModel):
@@ -73,4 +75,37 @@ def require_user(authorize: AuthJWT = Depends()):
             detail='Token is invalid or has expired'
         )
 
+    return user_id
+
+
+def decode_role(encoded_role: str) -> str:
+    try:
+        cipher_suite = FERNET_KEY
+        decoded_role = cipher_suite.decrypt(encoded_role).decode()
+        return decoded_role
+    except InvalidToken:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid role token"
+        )
+
+
+
+def require_user(authorize: AuthJWT = Depends()):
+    try:
+        authorize.jwt_required()
+        user_id = authorize.get_jwt_subject()
+        user = User.find_one({"_id": ObjectId(user_id)})
+        if not user:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
+        return user_id
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=str(e))
+
+def require_admin_user(authorize: AuthJWT = Depends()):
+    user_id = require_user(authorize)
+    user = User.find_one({"_id": ObjectId(user_id)})
+    role = decode_role(user['role'])
+    if role != 'admin':
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin privileges required")
     return user_id
